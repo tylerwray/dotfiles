@@ -1,0 +1,5 @@
+logs
+vendor
+tmp
+webroot/files/
+webroot/adminer.php
