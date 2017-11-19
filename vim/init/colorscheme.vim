@@ -1,2 +1,2 @@
 syntax on
-silent! colorscheme onedark
+silent! colorscheme monokai

@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/twray/Projects'
+let g:netrw_dirhist_2='/Users/twray/Projects/auth-nodejs-polarisPlatform'
+let g:netrw_dirhist_3='/Users/twray/Projects/auth-nodejs-polarisPlatform/src'
+let g:netrw_dirhist_4='/Users/twray/myDotfiles/install'

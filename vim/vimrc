@@ -16,41 +16,38 @@
 " .vim/init, or create a new one.
 
 set nocompatible                " Don't maintain compatibility with vi
-filetype off
-syntax on
 
-" Vundle stuff
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" Vim plugins
+call plug#begin()
 
-Plugin 'gmarik/vundle'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'joshdick/onedark.vim'
-Plugin 'nelstrom/vim-qargs.git'
-Plugin 'tpope/vim-fugitive.git'
-Plugin 'tpope/vim-cucumber.git'
-Plugin 'tpope/vim-haml.git'
-Plugin 'tpope/vim-endwise.git'
-Plugin 'tpope/vim-surround.git'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'scrooloose/nerdcommenter.git'
-Plugin 'mileszs/ack.vim.git'
-Plugin 'tpope/vim-repeat.git'
-Plugin 'pangloss/vim-javascript.git'
-Plugin 'plasticboy/vim-markdown.git'
-Plugin 'tpope/vim-unimpaired.git'
-Plugin 'godlygeek/tabular.git'
-Plugin 'ervandew/supertab.git'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate.git'
-Plugin 'itchyny/lightline.vim'
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'kien/ctrlp.vim'
-Plugin 'benmills/vimux'
-Plugin 'skalnik/vim-vroom'
+Plug 'gmarik/vundle'
+" Plug 'vim-syntastic/syntastic'
+" Plug 'joshdick/onedark.vim'
+" Plug 'tpope/vim-fugitive.git'
+" Plug 'tpope/vim-surround.git'
+Plug 'scrooloose/nerdtree.git'
+" Plug 'scrooloose/nerdcommenter.git'
+" Plug 'mileszs/ack.vim.git'
+" Plug 'tpope/vim-repeat.git'
+" Plug 'pangloss/vim-javascript.git'
+" Plug 'plasticboy/vim-markdown.git'
+" Plug 'tpope/vim-unimpaired.git'
+" Plug 'godlygeek/tabular.git'
+" Plug 'ervandew/supertab.git'
+" Plug 'MarcWeber/vim-addon-mw-utils'
+" Plug 'tomtom/tlib_vim'
+" Plug 'garbas/vim-snipmate.git'
+" Plug 'itchyny/lightline.vim'
+" Plug 'vim-scripts/matchit.zip'
+" Plug 'kien/ctrlp.vim'
+" Plug 'benmills/vimux'
+" Plug 'skalnik/vim-vroom'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'crusoexia/vim-monokai'
+Plug 'airblade/vim-gitgutter'
+Plug 'leafgarland/typescript-vim'
 
-filetype plugin indent on
+call plug#end()
 
 " Source initialization files
 runtime! init/**.vim

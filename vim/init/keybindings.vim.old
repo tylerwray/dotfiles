@@ -18,8 +18,8 @@ map \|          :NERDTreeFind<CR>
 
 " Find File/Buffer/Tag
 map <leader>F   :CtrlPClearCache<CR>:CtrlP<CR>
-map <Leader>f   :CtrlP<CR>
-map <Leader>b   :CtrlPBuffer<CR>
+map <leader>f   :CtrlP<CR>
+map <leader>b   :CtrlPBuffer<CR>
 
 " Comment/uncomment lines
 map <leader>/   <plug>NERDCommenterToggle
