@@ -1,2 +1,4 @@
 syntax on
-silent! colorscheme monokai
+silent! colorscheme onedark
+set background=dark
+let g:javascript_plugin_flow = 1

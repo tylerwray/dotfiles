@@ -1,18 +1,40 @@
+snippet cl
+	console.log(${1})
+snippet ce
+	console.error(${1})
+snippet jp
+	JSON.parse(${1})
+snippet js
+	JSON.stringify(${1})
+snippet ce
+	console.error(${1})
+snippet ce
+	console.error(${1})
+snippet ct
+	console.trace(${1:'TRACE ME LIKE YOUR FRENCH GIRLS'})'
 snippet it
-	it("${1}", function() {
+	it('${1}', () => {
 		${2}
-	});
-snippet desc
-	describe("${1}", function() {
+	})
+snippet describe
+	describe('${1}', () => {
 		${2}
-	});
-snippet cont
-	context("${1}", function() {
+	})
+snippet context
+	context('${1}', () => {
 		${2}
-	});
-snippet bef
-	beforeEach(function() {
+	})
+snippet before
+	beforeEach(() => {
 		${1}
-	});
+	})
+snippet after
+	beforeEach(() => {
+		${1}
+	})
 snippet arf
 	(${1}) => {${2}}
+snippet prom
+	new Promise((resolve, reject) => {
+		${1}
+	})

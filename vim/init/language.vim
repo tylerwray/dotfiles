@@ -9,7 +9,7 @@ function! StripTrailingWhitespace()
 endfunction
 
 " Trim whitespace on these filetypes
-autocmd BufWritePre *.java,*.php,*.feature,*.m,*.h,*.c,*.mm,*.cpp,*.hpp,*.rb,*.yml,*.js,*.ts,*.css,*.less,*.sass,*.scss,*.html,*.xml,*.erb,*.haml call StripTrailingWhitespace()
+autocmd BufWritePre *.java,*.php,*.feature,*.m,*.h,*.c,*.mm,*.cpp,*.hpp,*.rb,*.yml,*.js,*.ts,*.css,*.less,*.sass,*.scss,*.html,*.xml,*.erb,*.haml,*.txt call StripTrailingWhitespace()
 
 " Highlight JSON files as javascript
 autocmd BufRead,BufNewFile *.json set filetype=javascript
