@@ -102,7 +102,10 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
 # Load bash_profile
-[[ -e ~/.bash_profile ]] && emulate sh -c 'source ~/.bash_profile'
+# [[ -e ~/.bash_profile ]] && emulate sh -c 'source ~/.bash_profile'
 
-#export PROMPT=$PROMPT'
-#↳ $ '
+export PROMPT=$PROMPT'
+↳ $ '
+
+# # added by travis gem
+# [ -f /Users/twray/.travis/travis.sh ] && source /Users/twray/.travis/travis.sh

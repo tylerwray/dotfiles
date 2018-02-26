@@ -10,7 +10,7 @@ else
   ln -s $PWD/vimrc $HOME/.vimrc
   ln -s $PWD $HOME/.vim
 
-  echo === Vundling
+  echo === Plugin Install
   vim +PlugInstall +qall
 
   echo === Done

@@ -3,7 +3,7 @@ let mapleader = ","
 let maplocalleader = ";"
 
 " Auto-indent whole file
-map <silent> <F8> mzgg=G'z :delmarks z<CR>:echo "Reformatted."<CR>
+" map <silent> <F8> mzgg=G'z :delmarks z<CR>:echo "Reformatted."<CR>
 
 " File tree browser
 map \           :NERDTreeToggle<CR>

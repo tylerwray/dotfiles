@@ -38,7 +38,7 @@
     editor = vim
     abbrev = 12
     attributesfile = ~/.gitattributes
-    excludesfile = ~/.gitignore
+	excludesfile = /Users/twray/.gitignore_global
     autocrlf = input
     mergeoptions = --no-edit
     ignorecase = false
@@ -72,7 +72,6 @@
     default = current
 
 # Use separate file for username / github token / etc
-
 [filter "lfs"]
         clean = git lfs clean %f
         smudge = git lfs smudge %f
@@ -80,3 +79,10 @@
 
 [fetch]
         prune = true
+
+[alias]
+	ll = log --pretty=\\\"%Cred%h%Creset%x20%cr%Cblue%d%Creset%x20%C(cyan)%cN%Creset%x20%s\\\" --decorate=short --color --graph
+	ls = log --pretty=format:\"%Cred%h%C(yellow)%d\\\\ %Creset%s%C(cyan)\\\\ [%cn]\" --decorate --numstat
+
+[http]
+	sslVerify = false

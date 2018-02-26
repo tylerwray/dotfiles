@@ -1,3 +1,15 @@
+" GUI Options
+   if has("gui_running")
+     set macligatures
+   endif
+
+   set guifont=Fira\ Code:h16
+   set guioptions-=T               " Remove GUI toolbar
+   set guioptions-=e               " Use text tab bar, not GUI
+   set guioptions-=rL              " Remove scrollbars
+   set notimeout                   " No command timeout
+   set showcmd                     " Show typed command prefixes while waiting for operator
+
 " Text Formatting/Layout
 set fo=tcrqn      " See Help (complex)
 set ai            " autoindent

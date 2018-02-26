@@ -1,6 +1,8 @@
 " Whitespace & highlighting & language-specific config
 " ----------------------------------------------------
 
+let g:javascript_plugin_jsdoc = 1
+
 " Strip trailing whitespace for code files on save
 function! StripTrailingWhitespace()
   let save_cursor = getpos(".")
@@ -12,7 +14,7 @@ endfunction
 autocmd BufWritePre *.java,*.php,*.feature,*.m,*.h,*.c,*.mm,*.cpp,*.hpp,*.rb,*.yml,*.js,*.ts,*.css,*.less,*.sass,*.scss,*.html,*.xml,*.erb,*.haml,*.txt call StripTrailingWhitespace()
 
 " Highlight JSON files as javascript
-autocmd BufRead,BufNewFile *.json set filetype=javascript
+" autocmd BufRead,BufNewFile *.json set filetype=javascript
 
 " Highlight Jasmine fixture files as HTML
 " autocmd BufRead,BufNewFile *.jasmine_fixture set filetype=html

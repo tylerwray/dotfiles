@@ -20,26 +20,19 @@ set nocompatible                " Don't maintain compatibility with vi
 " Vim plugins
 call plug#begin()
 
-Plug 'vim-syntastic/syntastic'
 Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 " Plug 'scrooloose/nerdcommenter'
-" Plug 'mileszs/ack.vim'
-" Plug 'tpope/vim-repeat'
 " Plug 'plasticboy/vim-markdown'
-" Plug 'tpope/vim-unimpaired'
-" Plug 'godlygeek/tabular'
-" Plug 'ervandew/supertab'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
-" Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
+Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
-
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
 " Source initialization files
