@@ -24,7 +24,8 @@ alias eslint="node_modules/.bin/eslint ./**"
 alias dc="docker-compose"
 alias drm="docker rm -f \$(docker ps -aq)"
 alias drmi="docker rmi -f \$(docker images -q)"
-alias dsp="docker system prune"
+alias drmv="docker volume rm -f \$(docker volume ls)"
+alias dsp="docker system prune --volumes"
 
 # Easier navigation: .., ..., ~ and -
 alias ..="cd .."

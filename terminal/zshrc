@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
+export GOPATH=$(go env GOPATH)
+
 # Directories to be prepended to $PATH
 declare -a dirs_to_prepend
 dirs_to_prepend=(
@@ -84,14 +86,6 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(docker, docker-compose)
 
-# User configuration
-# Editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='code'
-fi
-
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
@@ -107,5 +101,10 @@ source $HOME/.aliases
 export PROMPT=$PROMPT'
 ↳ $ '
 
-# # added by travis gem
-# [ -f /Users/twray/.travis/travis.sh ] && source /Users/twray/.travis/travis.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# added by travis gem
+[ -f /Users/twray/.travis/travis.sh ] && source /Users/twray/.travis/travis.sh
