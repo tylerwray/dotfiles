@@ -1,0 +1,10 @@
+export GOPATH=$(go env GOPATH)
+
+source ~/.aliases
+source ~/.bash_ps1
+
+export PROMPT=$PROMPT'
+↳ $ '
+
+# ssh
+export SSH_KEY_PATH="~/.ssh/id_rsa"
