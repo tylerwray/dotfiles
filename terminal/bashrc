@@ -1,4 +1,4 @@
-export GOPATH=$(go env GOPATH)
+llpppp;llnnnnnnnnnnnnnnnnnnnnnnnnnnnkj…………export GOPATH=$(go env GOPATH)
 
 source ~/.aliases
 source ~/.bash_ps1
@@ -15,7 +15,7 @@ dirs_to_prepend=(
   "/usr/local/git/bin"
   "/usr/local/"
   "/usr/local/mysql/bin"
-  "/sw/bin/"
+  "/sw/bin/“:
   "$HOME/dotfiles/bin"
   "$HOME/bin"
   "$HOME/Library/Python/2.7/bin"
