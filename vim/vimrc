@@ -2,8 +2,6 @@
 call plug#begin()
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'fatih/molokai'
-Plug 'joshdick/onedark.vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
@@ -11,9 +9,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'SirVer/ultisnips'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " Color
@@ -26,7 +25,6 @@ colorscheme molokai
 set background=dark
 hi Search guibg=peru guifg=wheat
 
-" Keybindings
 let mapleader = ","
 
 " Make Y yank to end of line
@@ -92,8 +90,6 @@ set smartcase
 " Plugin Config
 let g:go_fmt_command = "goimports"
 
-let g:lightline = { 'colorscheme': 'molokai' }
-
 let NERDSpaceDelims = 1 " Spaces after comment
 
 map <Leader>/ <plug>NERDCommenterToggle
@@ -105,17 +101,23 @@ let g:ale_fix_on_save = 1
 let g:ale_sign_error = '✕'
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_column_always = 1
-hi ALEErrorSign guibg=234
-hi ALEErrorSign guifg=red
-hi ALEError guifg=red
-hi ALEWarningSign guibg=234
-hi ALEWarningSign guifg=yellow
-hi ALEWarning guifg=yellow
+hi ALEErrorSign ctermbg=234
+hi ALEErrorSign ctermfg=red
+hi ALEError ctermfg=red
+hi ALEWarningSign ctermbg=234
+hi ALEWarningSign ctermfg=yellow
+hi ALEWarning ctermfg=yellow
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1
-" Use tab with deoplete
-inoremap <expr><Tab>  pumvisible() ? "\<C-n>" : "\<Tab>"
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('auto_complete_delay', 200)
+" let g:deoplete#file#enable_buffer_path = 1
 
 " fzf open
 map <Leader>p :Files<CR>
+
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
