@@ -3,7 +3,7 @@
 #                Tyler Wray's .zshrc                 #
 #                                                    #
 ######################################################
-export EDITOR='vim'
+export EDITOR='nvim'
 export GOPATH=$(go env GOPATH)
 
 # Directories to be prepended to $PATH
@@ -49,8 +49,8 @@ export ZSH="/Users/twray/.oh-my-zsh"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="refined"
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
+# ZSH_THEME="agnoster"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -111,27 +111,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# ----------- Aliases --------------
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
 # Projects
 alias app="cd ~/Projects/redIQ-app-ui"
 alias login="cd ~/Projects/redIQ-login-ui"
@@ -142,16 +123,17 @@ alias l="ls"
 alias e=$EDITOR
 alias g="git"
 alias v="vim"
+alias n="nvim"
 alias py="python3"
 
-# --- Docker ---
+# Docker
 alias dc="docker-compose"
 alias drm="docker rm -f \$(docker ps -aq)"
 alias drmi="docker rmi -f \$(docker images -q)"
 alias drmv="docker volume rm -f \$(docker volume ls)"
 alias dsp="docker system prune --volumes"
 
-# Easier navigation: .., ..., ~ and -
+# Easier navigation
 alias ..="cd .."
 alias cd..="cd .."
 
@@ -173,17 +155,25 @@ alias get="curl -O -L"
 # File size
 alias fs="stat -f \"%z bytes\""
 
+# Search in directory
+alias search="grep --exclude-dir=node_modules -rnw . -e "
+
 # ZSH
 alias reload="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'"
 alias zshrc="$EDITOR ~/.zshrc"
+
+# NVIM
+alias nviminit="$EDITOR ~/.config/nvim/init.vim"
 
 # VIM
 alias vimrc="$EDITOR ~/.vimrc"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
