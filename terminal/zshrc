@@ -3,7 +3,6 @@
 #                Tyler Wray's .zshrc                 #
 #                                                    #
 ######################################################
-export EDITOR='nvim'
 export GOPATH=$(go env GOPATH)
 
 # Directories to be prepended to $PATH
@@ -114,13 +113,13 @@ source $ZSH/oh-my-zsh.sh
 # ----------- Aliases --------------
 
 # Projects
-alias app="cd ~/Projects/redIQ-app-ui"
-alias login="cd ~/Projects/redIQ-login-ui"
+alias app="cd ~/work/redIQ-app-ui"
+alias login="cd ~/work/redIQ-login-ui"
 alias credentials="cd ~/go/src/credentials-go-polarisPlatform"
+alias adapter="cd ~/work/redIQ-adapter"
 
 # Shortcuts
 alias l="ls"
-alias e=$EDITOR
 alias g="git"
 alias v="vim"
 alias py="python3"
@@ -159,11 +158,11 @@ alias search="grep --exclude-dir=node_modules -rnw . -e "
 
 # ZSH
 alias reload="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'"
-alias zshrc="$EDITOR ~/.zshrc"
+alias zshrc="nvim ~/.zshrc"
 
 # VIM
 alias vim="nvim"
-alias vimrc="$EDITOR ~/.vimrc"
+alias vimrc="nvim ~/.vimrc"
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
@@ -174,3 +173,5 @@ export NVM_DIR="$HOME/.nvm"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+

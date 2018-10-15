@@ -1,28 +1,19 @@
 " Install Plugins
 call plug#begin()
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'fatih/molokai'
+Plug 'mhartington/oceanic-next'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " Color
-syntax on
-set t_Co=256
 if (has("termguicolors"))
     set termguicolors
 endif
-colorscheme molokai
-set background=dark
+colorscheme OceanicNext
 hi Search guibg=peru guifg=wheat
 
 let mapleader = ","
@@ -34,7 +25,7 @@ map Y           y$
 set hlsearch      " highlight searched for phrases
 set incsearch     " highlight as you type you search phrase
 set history=1024  " History size
-set so=10         " Keep x lines (top/bottom) for scope
+set scrolloff=10         " Keep x lines (top/bottom) for scope
 
 " Characters to show when whitespace is enabled
 set list
@@ -80,7 +71,6 @@ set whichwrap+=<,>,h,l                " backspace and cursor keys wrap to
 set fillchars=vert:\ ,stl:\ ,stlnc:\  " make the splitters between windows be blank
 " make splitters between windows use the same background/foreground color as vim
 hi VertSplit guibg=bg guifg=bg
-set scrolloff=5                       " Scroll when the cursor is 5 lines from edge
 set cursorline                        " Highlight current line
 
 " Case insensitive search by default
@@ -94,30 +84,4 @@ let NERDSpaceDelims = 1 " Spaces after comment
 
 map <Leader>/ <plug>NERDCommenterToggle
 
-map \ :NERDTreeToggle<CR>
-let g:ale_fixers = { 'javascript': ['eslint'] }
-
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = '✕'
-let g:ale_sign_warning = '⚠'
-let g:ale_sign_column_always = 1
-hi ALEErrorSign ctermbg=234
-hi ALEErrorSign ctermfg=red
-hi ALEError ctermfg=red
-hi ALEWarningSign ctermbg=234
-hi ALEWarningSign ctermfg=yellow
-hi ALEWarning ctermfg=yellow
-
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option('auto_complete_delay', 200)
-" let g:deoplete#file#enable_buffer_path = 1
-
-" fzf open
-map <Leader>p :Files<CR>
-
-let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+let g:lightline = {'colorscheme': 'material'}

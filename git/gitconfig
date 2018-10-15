@@ -34,7 +34,7 @@
     tool = opendiff
 
 [core]
-    editor = vim
+    editor = nvim
     abbrev = 12
     autocrlf = input
     mergeoptions = --no-edit
