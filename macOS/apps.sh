@@ -5,7 +5,7 @@ command_exists () {
 }
 
 # Install nvm
-if [ -d $HOME/.nvm ]; then
+if [ -d "$HOME/.nvm" ]; then
     echo "NVM already installed"
 else
     echo "Installing NVM"
@@ -35,6 +35,7 @@ gui_apps=(
     "sketch"
     "slack"
     "spotify"
+    "spectacle"
     "sublime-text"
     "the-unarchiver"
     "quicklook-json"
@@ -46,7 +47,8 @@ gui_apps=(
 
 for app in "${gui_apps[@]}"
 do
-	brew cask install $app
+    #	brew cask install $app
+    echo "skipping $app"
 done
 
 # Install Terminal apps
@@ -54,11 +56,14 @@ terminal_apps=(
     "elixir"
     "go"
     "jq"
+    "ruby"
     "tree"
     "vim"
 )
 
 for app in "${terminal_apps[@]}"
 do
-	brew install $app
+    echo "skipping $app"
+	# brew install $app
 done
+

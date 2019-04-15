@@ -1,6 +1,5 @@
 unlink ~/.aliases
 unlink ~/.gitconfig
-unlink ~/.gitignore
-unlink ~/.vimrc
+unlink ~/.gitignore_global
 unlink ~/.zshrc
-unlink ~/init
+unlink ~/.config/nvim

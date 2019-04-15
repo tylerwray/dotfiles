@@ -39,6 +39,7 @@
     autocrlf = input
     mergeoptions = --no-edit
     ignorecase = false
+    excludesfile = /Users/tylerwray/.gitignore_global
 
 [diff "bin"]
     # Use `hexdump` to diff binary files
@@ -65,3 +66,4 @@
 
 [fetch]
         prune = true
+
