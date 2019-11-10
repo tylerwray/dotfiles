@@ -58,14 +58,17 @@ source $ZSH/oh-my-zsh.sh
 # Shortcuts
 alias l="ls"
 alias g="git"
-alias e="nvim"
+alias e="vim \$(fzf -m)"
+
+# Elixir
+alias phx="iex -S mix phx.server"
 
 # Docker
 alias dc="docker-compose"
 alias drm="docker rm -f \$(docker ps -aq)"
 alias drmi="docker rmi -f \$(docker images -q)"
 alias drmv="docker volume rm -f \$(docker volume ls)"
-alias dsp="docker system prune --volumes"
+alias dsp="docker system prune --all --force --volumes"
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -76,9 +79,11 @@ alias myip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
 # Git Stuff
 alias gs='git status'
 alias gl='git log'
+alias gb='git branch | cat'
 alias gsl='git shortlog -sn'
 alias gwts='git ls-files | xargs wc -l' # count number of lines of code in a git project
-alias lumberjack="git fetch -p && git branch -vv --color=never | awk '/: gone]/{print $1}' | xargs git branch -D"
+alias lumberjack="git fetch -p > /dev/null 2>&1 && git branch --no-color -vv | grep 'origin/.*: gone]' | awk '{print \$1}' | xargs git branch -D"
+alias wip="git add . && git commit -m \"WIP\""
 
 # Download file and save it with filename of remote file
 alias get="curl -O -L"
@@ -91,13 +96,33 @@ alias search="grep --exclude-dir=node_modules -rnw . -e "
 
 # ZSH
 alias reload="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'"
-alias zshrc="e ~/.zshrc"
+alias zshrc="vi ~/dotfiles/terminal/zshrc"
+
+# vim
+alias vi="nvim"
+alias vim="nvim"
+alias vimconfig="vi ~/.config/nvim"
+
+alias tdd="mix test --stale --max-failures 1 --listen-on-stdin --trace --seed 0"
+alias k="kubectl"
+
+# Generate a UUID
+alias uid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
+
+# ---------- Environment ----------
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # fzf
-# export FZF_DEFAULT_COMMAND="ag -g \"\""
+export FZF_DEFAULT_COMMAND="fd --type f"
+FZF_DEFAULT_OPTS="--preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --theme=TwoDark --color=always --style=numbers,changes --pager=\"less -FR\" {} || cat {}) 2> /dev/null | head -300'"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=dark
+--color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:-1,hl+:#d858fe
+--color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
+'
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -107,7 +132,48 @@ export NVM_DIR="$HOME/.nvm"
 
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
+# ---------- Functions ----------
+
+promo() {
+  URL=$(curl --request POST --header "PRIVATE-TOKEN: XiBwVeNAU56zQxk1KyQS" \
+    --header "Content-Type: application/json" \
+    --data "{
+      \"ref\": \"master\",
+      \"variables\": [
+        {\"key\": \"MIX_TASK_ENV\", \"value\": \"prod-usw2-payments\"},
+        {
+          \"key\": \"MIX_TASK\",
+          \"value\": \"account.set_pricing $1 --fee-percentage 0 --fee-fixed 0\"
+        }
+      ]
+    }" \
+    "https://gitlab.podium.com/api/v4/projects/229/pipeline" \
+  | jq '.web_url'
+  )
+  open $(echo "${URL//\"}")
+}
+
+test-invoice() {
+  URL=$(curl --request POST --header "PRIVATE-TOKEN: XiBwVeNAU56zQxk1KyQS" \
+    --header "Content-Type: application/json" \
+    --data "{
+      \"ref\": \"master\",
+      \"variables\": [
+        {\"key\": \"MIX_TASK_ENV\", \"value\": \"prod-usw2-payments\"},
+        {
+          \"key\": \"MIX_TASK\",
+          \"value\": \"invoice.mark_test $1\"
+        }
+      ]
+    }" \
+    "https://gitlab.podium.com/api/v4/projects/229/pipeline" \
+  | jq '.web_url'
+  )
+  open $(echo "${URL//\"}")
+}
+
 # for ASDF
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
+fpath+=${ZDOTDIR:-~}/.zsh_functions

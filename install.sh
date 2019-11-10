@@ -8,7 +8,7 @@ ln -sF "$DIR/init" "$HOME/init"
 
 # macOS specific setup
 ./macOS/apps.sh
-./macOS/setup.sh
+# ./macOS/setup.sh
 
 # Terminal Changes
 ln -sF "$DIR/terminal/aliases" "$HOME/.aliases"
