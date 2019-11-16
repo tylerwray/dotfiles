@@ -1,8 +1,9 @@
-" ========== PLUGINS ==========
+" ========== PLUG INS ==========
 call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'elixir-editors/vim-elixir'
+Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
@@ -14,8 +15,13 @@ Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 call plug#end()
+
+" ========== NEOVIM CONFIGURATION ==========
+" Help Neovim find ruby gem
+let g:ruby_host_prog = '~/.rvm/gems/ruby-2.5.1/bin/neovim-ruby-host'
 
 " ========== OPTIONS ==========
 
@@ -51,5 +57,7 @@ let g:lightline = {
 let NERDSpaceDelims = 1 " Spaces after comment
 let NERDCommentEmptyLines = 1 " Ability to just comment empty lines
 
-" ---------- Ultisnips ----------
+" ---------- UltiSnips ----------
 let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom_snippets"]
+

@@ -1,57 +1,68 @@
-" Visual Cues
-set hlsearch      " highlight searched for phrases
-set incsearch     " highlight as you type you search phrase
-set history=1024  " History size
-set scrolloff=10  " Keep x lines (top/bottom) for scope
-
 " Characters to show when whitespace is enabled
 set list
 set listchars=tab:⟶\ ,extends:›,precedes:‹,nbsp:·,trail:·,space:·
 match ErrorMsg '\s\+$'
 
-set noshowmode " Hide the native mode, use the powerline
-set splitright " Add new windows towards the right
-set splitbelow " ... and bottom
-
 " Text Formatting/Layout
-set ai            " autoindent
-set si            " smartindent
-set smarttab      " Use shiftwidth to tab at line beginning
-set cindent       " do c-style indenting
+set ai            " auto indent
+set si            " smart indent
+set smarttab      " Use shift width to tab at line beginning
+set cindent       " do C-style indenting
 set tabstop=2     " tab spacing (settings below are just to unify it)
 set softtabstop=2 " unify
 set shiftwidth=2  " unify
 set expandtab     " Give me spaces or give me death
 set nowrap        " do not wrap lines
 
+" Folding (not sure I like this yet)
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
 " Files/Backups
-set autowrite     " Save the file when shell/cmd are run
-set autoread      " Update buffer when files change from outside
-set wildmenu      " Nice menu completion
-set wildmode=full " zsh style command mode completion
-set swapfile      " Keep swapfiles
+set autowrite                                                  " Save the file when shell commands are run
+set autoread                                                   " Update buffer when files change from outside
+set wildmenu                                                   " Nice menu completion
+set wildmode=full                                              " zsh style command mode completion
+set swapfile                                                   " Keep swap files
 set wildignore+=tags,.git,*.o,tmp/**,vendor/**,node_modules/**
-set isk+=_,$,@,%,#,-              " none of these should be word dividers
+set isk+=_,$,@,#,-                                             " none of these should be word dividers
 set directory=~/.vim-tmp,~/tmp,/var/tmp,/tmp
 set backupdir=~/.vim-tmp,~/tmp,/var/tmp,/tmp
+set clipboard=unnamedplus                                      " Yank uses system keyboard. (Not sure I like this yet)
 
 " Vim UI
-set mouse=a                           " Mouse support
-set laststatus=2                      " Show command bar
-set cmdheight=1                       " the command bar is 2 hign
-set number                            " turn on line numbers
-set relativenumber                    " line numbers relative to cursor
-set lz                                " do not redraw while running macros (much faster) (LazyRedraw)
-set whichwrap+=<,>,h,l                " backspace and cursor keys wrap to
-set backspace=indent,eol,start        " backspace work properly
-set fillchars=vert:\ ,stl:\ ,stlnc:\  " make the splitters between windows be blank
+set mouse=a                          " Enable mouse for scrolling
+set laststatus=2                     " Show command bar
+set cmdheight=1                      " the command bar is 2 high
+set number                           " turn on line numbers
+set relativenumber                   " line numbers relative to cursor
+set lazyredraw                       " do not redraw while running macros (much faster) (Lazy Redraw)
+set whichwrap+=<,>,h,l               " backspace and cursor keys wrap to
+set backspace=indent,eol,start       " backspace work properly
+set fillchars=vert:\ ,stl:\ ,stlnc:\ " make the splitters between windows be blank
+set cursorline                       " Highlight current line
+set noshowmode                       " Hide the native mode, use vim-lightline
+set splitright                       " Add new windows towards the right
+set splitbelow                       " ... and bottom
+set history=1024                     " History size
+set scrolloff=10                     " Keep x lines (top/bottom) for scope
 
-" make splitters between windows use the same background/foreground color as vim
-hi VertSplit guibg=bg guifg=bg
-set cursorline                        " Highlight current line
-
-" Case insensitive search by default
-set ignorecase
-set smartcase
+" Awesome searching
+set ignorecase " Case in-sensitive searching
+set smartcase  " Lowercase fuzzy search, uppercase specific search
+set hlsearch   " highlight searched for phrases
+set incsearch  " highlight as you type you search phrase
 
 set timeoutlen=1000 ttimeoutlen=0 " Timeout delays for escape key
+
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Turn persistent undo on means that you can undo even when you close a buffer/VIM
+try
+    set undodir=~/.config/nvim/temp_dirs/undodir
+    set undofile
+catch
+endtry
