@@ -51,7 +51,7 @@ done
 terminal_apps=(
   "bat"
   "elixir"
-  "fd"
+  "rg"
   "git"
   "go"
   "jq"
