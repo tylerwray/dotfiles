@@ -3,18 +3,16 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'elixir-editors/vim-elixir'
-Plug 'godlygeek/tabular'
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 call plug#end()
@@ -57,7 +55,10 @@ let g:lightline = {
 let NERDSpaceDelims = 1 " Spaces after comment
 let NERDCommentEmptyLines = 1 " Ability to just comment empty lines
 
+" ---------- Nerd Tree ----------
+let g:NERDTreeIgnore = ['^node_modules$']
+
 " ---------- UltiSnips ----------
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom_snippets"]
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom_snippets"]
 

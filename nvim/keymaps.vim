@@ -1,10 +1,13 @@
-let mapleader = " "
+let mapleader = "\<Space>"
 
 " Comment code easily
 map <leader>/ <plug>NERDCommenterToggle
 
 " Toggle the file tree
 map <silent> <Bslash> :NERDTreeToggle<CR>
+
+" Focus current file in tree
+map <silent> <leader>E :NERDTreeFind<CR>
 
 " Fuzzy find a file
 nnoremap <silent> <leader>p :Files<CR>
@@ -18,8 +21,8 @@ nnoremap <silent> <leader>f :Rg<CR>
 " List buffers nicely with fzf
 nnoremap <silent> <leader>b :Buffers<CR>
 
-" Quick toggle folds with the comma command
-nnoremap , za
+" Quick toggle folds with the comma command (not really using this)
+" nnoremap , za
 
 " Yank text indo the OS clipboard
 vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR>
@@ -28,6 +31,7 @@ vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res
 nmap <leader>s :%s///g<left><left>
 
 " Smooth scrolling
+" Disabling for now to diiscourage mouse use
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
@@ -41,5 +45,3 @@ map <C-L> <C-W>l
 nmap <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
 nmap <Leader>T :execute "!clear && mix test %"<CR>
 
-" Clear search highlighting when pressing Escape
-nnoremap <esc> :noh<return><esc>

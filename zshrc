@@ -53,7 +53,13 @@ plugins=(git docker)
 
 source $ZSH/oh-my-zsh.sh
 
+# Source local config that shouldn't be tracked with Git
+source ~/.localrc
+
 # ----------- Aliases --------------
+
+# Alacritty configuration
+alias alc="nvim ~/.config/alacritty/alacritty.yml"
 
 # Shortcuts
 alias l="ls"
@@ -61,6 +67,7 @@ alias g="git"
 alias e="nvim +Files +only"
 
 # Elixir
+# alias phx="source .env && iex -S mix phx.server"
 alias phx="iex -S mix phx.server"
 
 # Docker
@@ -94,18 +101,22 @@ alias fs="stat -f \"%z bytes\""
 # ZSH
 alias reload="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'"
 alias zshrc="nvim ~/dotfiles/terminal/zshrc"
+alias localrc="nvim ~/.localrc"
 
 # vim
 alias vi="nvim"
 alias vim="nvim"
-alias vc="nvim ~/.config/nvim"
+alias vc="(cd ~/.config/nvim && nvim .)"
 alias plug_install="nvim +PlugInstall +qall"
 
-alias tdd="mix test --stale --max-failures 1 --listen-on-stdin --trace --seed 0"
+# tmux
+alias tm="TERM=xterm-256color tmux"
+alias tmc="nvim ~/.tmux.conf"
+
 alias k="kubectl"
 
 # Generate a UUID
-alias uid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
+alias uuid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
 
 # ---------- Environment ----------
 
@@ -113,7 +124,7 @@ alias uid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # fzf
-export FZF_DEFAULT_COMMAND="rg --files --hidden"
+export FZF_DEFAULT_COMMAND="rg --files --hidden --iglob '!.git'"
 FZF_DEFAULT_OPTS="--preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --theme=TwoDark --color=always --style=numbers,changes --pager=\"less -FR\" {} || cat {}) 2> /dev/null | head -300'"
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=dark
@@ -121,79 +132,12 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
 '
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# asdf configuration
+export NODEJS_CHECK_SIGNATURES=no
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
-# ---------- Functions ----------
-
-promo() {
-  URL=$(curl --request POST --header "PRIVATE-TOKEN: XiBwVeNAU56zQxk1KyQS" \
-    --header "Content-Type: application/json" \
-    --data "{
-      \"ref\": \"master\",
-      \"variables\": [
-        {\"key\": \"MIX_TASK_ENV\", \"value\": \"prod-usw2-payments\"},
-        {
-          \"key\": \"MIX_TASK\",
-          \"value\": \"account.set_pricing $1 --fee-percentage 0 --fee-fixed 0\"
-        }
-      ]
-    }" \
-    "https://gitlab.podium.com/api/v4/projects/229/pipeline" \
-  | jq '.web_url'
-  )
-  open $(echo "${URL//\"}")
-}
-
-test-invoice() {
-  URL=$(curl --request POST --header "PRIVATE-TOKEN: XiBwVeNAU56zQxk1KyQS" \
-    --header "Content-Type: application/json" \
-    --data "{
-      \"ref\": \"master\",
-      \"variables\": [
-        {\"key\": \"MIX_TASK_ENV\", \"value\": \"prod-usw2-payments\"},
-        {
-          \"key\": \"MIX_TASK\",
-          \"value\": \"invoice.mark_test $1\"
-        }
-      ]
-    }" \
-    "https://gitlab.podium.com/api/v4/projects/229/pipeline" \
-  | jq '.web_url'
-  )
-  open $(echo "${URL//\"}")
-}
-
-enable-refunds() {
-  URL=$(curl --request POST --header "PRIVATE-TOKEN: XiBwVeNAU56zQxk1KyQS" \
-    --header "Content-Type: application/json" \
-    --data "{
-      \"ref\": \"master\",
-      \"variables\": [
-        {\"key\": \"MIX_TASK_ENV\", \"value\": \"prod-usw2-payments\"},
-        {
-          \"key\": \"MIX_TASK\",
-          \"value\": \"account.toggle_refunds_enabled --on $1\"
-        }
-      ]
-    }" \
-    "https://gitlab.podium.com/api/v4/projects/229/pipeline" \
-  | jq '.web_url'
-  )
-  open $(echo "${URL//\"}")
-}
-
-go() {
-  cd ~/podium/$1
-}
-
-# for ASDF
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
-fpath+=${ZDOTDIR:-~}/.zsh_functions
+# Not sure what this is
+# fpath+=${ZDOTDIR:-~}/.zsh_functions

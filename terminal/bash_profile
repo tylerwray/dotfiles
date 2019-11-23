@@ -1,2 +1,0 @@
-test ~/.bashrc && . ~/.bashrc
-test ~/.bash_ps1 && . ~/.bash_ps1

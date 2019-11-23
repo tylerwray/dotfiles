@@ -2,17 +2,12 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Link init folder to home
-# TODO Fix this
-ln -sF "$DIR/init" "$HOME/init"
-
 # macOS specific setup
-./macOS/apps.sh
+# ./macOS/apps.sh
 # ./macOS/setup.sh
 
 # Terminal Changes
-ln -sF "$DIR/terminal/aliases" "$HOME/.aliases"
-ln -sF "$DIR/terminal/zshrc" "$HOME/.zshrc"
+ln -sF "$DIR/zshrc" "$HOME/.zshrc"
 
 # Git Changes
 ln -sF "$DIR/git/gitconfig" "$HOME/.gitconfig"
@@ -31,9 +26,5 @@ fi
 echo "Installing Vim Plugins ...."
 nvim +PlugInstall +qall
 
-printf "TODO:\n\
-install: \n\
-  Stuff (https://github.com/avibrazil/RDM) \n\
-\n\
-open and login to literally everything \n\
-"
+printf "All set 🎉"
+

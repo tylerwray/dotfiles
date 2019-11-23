@@ -5,12 +5,12 @@ command_exists () {
 }
 
 # Install nvm
-if [ -d "$HOME/.nvm" ]; then
-  echo "NVM already installed"
-else
-  echo "Installing NVM"
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-fi
+# if [ -d "$HOME/.nvm" ]; then
+  # echo "NVM already installed"
+# else
+  # echo "Installing NVM"
+  # curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+# fi
 
 # Install homebrew
 if command_exists brew ; then
@@ -56,7 +56,6 @@ terminal_apps=(
   "go"
   "jq"
   "neovim"
-  "node"
   "python"
   "ruby"
   "tree"

@@ -11,3 +11,13 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
+
+" Reload any vimrc configuration changes
+command! Reload source ~/.config/nvim/init.vim
+
+" JSONC syntax 
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
