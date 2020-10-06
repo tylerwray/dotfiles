@@ -1,6 +1,6 @@
 set list                                                          " Show list characters
 set listchars=tab:⟶\ ,extends:›,precedes:‹,nbsp:·,trail:·,space:· " Custom list characters
-match ErrorMsg '\s\+$'                                            " TODO: Discover what this does
+" match ErrorMsg '\s\+$'                                            " TODO: Discover what this does
 set ai                                                            " auto indent
 set si                                                            " smart indent
 set smarttab                                                      " Use shift width to tab at line beginning
@@ -10,10 +10,10 @@ set softtabstop=2                                                 " unify
 set shiftwidth=2                                                  " unify
 set expandtab                                                     " Give me spaces or give me death
 set nowrap                                                        " do not wrap lines
-" set foldmethod=indent                                             " Fold based on indentation
-" set foldnestmax=10                                                " Don't go too crazy with folds
-" set nofoldenable                                                  " Don't show filds right away
-" set foldlevel=2                                                   " Initially show folds only this deep
+set foldmethod=indent                                             " Fold based on indentation
+set foldnestmax=10                                                " Don't go too crazy with folds
+set nofoldenable                                                  " Don't show filds right away
+set foldlevel=2                                                   " Initially show folds only this deep
 set autowrite                                                     " Save the file when shell commands are run
 set autoread                                                      " Update buffer when files change from outside
 set wildmenu                                                      " Nice menu completion
@@ -23,16 +23,13 @@ set wildignore+=tags,.git,*.o,tmp/**,vendor/**,node_modules/**    " Ignore some 
 set isk+=_,$,@,#,-                                                " none of these should be word dividers
 set directory=~/.vim-tmp,~/tmp,/var/tmp,/tmp                      " Swap file directories
 set backupdir=~/.vim-tmp,~/tmp,/var/tmp,/tmp                      " Backup file directories
-" set clipboard=unnamedplus                                         " Yank uses system keyboard. (Not sure I like this yet)
 set mouse=a                                                       " Enable mouse for scrolling
 set laststatus=2                                                  " Show command bar
 set cmdheight=2                                                   " the command bar is 2 high
 set number                                                        " turn on line numbers
-" set relativenumber                                                " line numbers relative to cursor
 set lazyredraw                                                    " do not redraw while running macros (much faster) (Lazy Redraw)
 set whichwrap+=<,>,h,l                                            " backspace and cursor keys wrap to
 set backspace=indent,eol,start                                    " backspace work properly
-" set fillchars=vert:\ ,stl:\ ,stlnc:\                              " make the splitters between windows be blank
 set cursorline                                                    " Highlight current line
 set noshowmode                                                    " Hide the native mode, use vim-lightline
 set splitright                                                    " Add new windows towards the right
@@ -49,3 +46,8 @@ set incsearch                                                     " highlight as
 set timeoutlen=1000 ttimeoutlen=0                                 " Timeout delays for escape key
 set undodir=~/.config/nvim/temp_dirs/undodir                      " Persistent undo directories
 set undofile                                                      " Enable Persistent undo so that I can undo even when you close a buffer
+set pumheight=10                                                  " Make popup menu smaller
+set formatoptions-=cro                                            " Don't continue line comments
+
+" Make vim bg transparent to match terminal
+hi Normal guibg=NONE ctermbg=NONE

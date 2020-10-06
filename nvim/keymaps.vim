@@ -41,7 +41,18 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
 
-" Run elixir tests
-nmap <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
-nmap <Leader>T :execute "!clear && mix test %"<CR>
+" Better line shifting
+vnoremap < <gv
+vnoremap > >gv
 
+nnoremap <silent> <leader>h :split<CR>
+nnoremap <silent> <leader>v :vsplit<CR>
+
+" Run tests
+autocmd FileType elixir     nmap <buffer> <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
+autocmd FileType elixir     nmap <buffer> <Leader>T :execute "!clear && mix test %"<CR>
+autocmd FileType go         nmap <buffer> <Leader>t :GoTestFunc<CR>
+autocmd FileType go         nmap <buffer> <Leader>T :GoTest<CR>
+
+" Reload vim config
+map <C-s> :source ~/.config/nvim/init.vim<CR>

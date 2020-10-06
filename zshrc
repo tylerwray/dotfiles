@@ -3,6 +3,8 @@
 #                Tyler Wray's .zshrc                 #
 #                                                    #
 ######################################################
+autoload -U +X bashcompinit && bashcompinit
+autoload -U +X compinit && compinit
 
 # Directories to be prepended to $PATH
 declare -a dirs_to_prepend
@@ -23,6 +25,7 @@ dirs_to_prepend=(
   "$HOME/go/bin"
   "/usr/local/opt/icu4c/bin"
   "/usr/local/opt/icu4c/sbin"
+  "$HOME/.cargo/bin"
 )
 
 # Loop and assign path above
@@ -49,7 +52,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker)
+plugins=(asdf git docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -64,7 +67,7 @@ alias alc="nvim ~/.config/alacritty/alacritty.yml"
 # Shortcuts
 alias l="ls"
 alias g="git"
-alias e="nvim +Files +only"
+alias e="nvim +Files!"
 
 # Elixir
 # alias phx="source .env && iex -S mix phx.server"
@@ -90,7 +93,8 @@ alias gb='git branch | cat'
 alias gsl='git shortlog -sn'
 alias gwts='git ls-files | xargs wc -l' # count number of lines of code in a git project
 alias lumberjack="git fetch -p > /dev/null 2>&1 && git branch --no-color -vv | grep 'origin/.*: gone]' | awk '{print \$1}' | xargs git branch -D"
-alias wip="git add . && git commit -m \"WIP\""
+alias wip="git add . && git commit -m \"WIP\" --no-verify"
+export GIT_MERGE_AUTOEDIT=no # Don't open merge message edit when merging master
 
 # Download file and save it with filename of remote file
 alias get="curl -O -L"
@@ -100,18 +104,20 @@ alias fs="stat -f \"%z bytes\""
 
 # ZSH
 alias reload="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'"
-alias zshrc="nvim ~/dotfiles/terminal/zshrc"
+alias zshrc="nvim ~/dotfiles/zshrc"
 alias localrc="nvim ~/.localrc"
 
+
 # vim
-alias vi="nvim"
+alias vi="vim"
 alias vim="nvim"
 alias vc="(cd ~/.config/nvim && nvim .)"
 alias plug_install="nvim +PlugInstall +qall"
 
 # tmux
-alias tm="TERM=xterm-256color tmux"
+alias tm="TERM=tmux-256color tmux -2"
 alias tmc="nvim ~/.tmux.conf"
+alias tmks="tmux kill-session -t"
 
 alias k="kubectl"
 
@@ -120,24 +126,59 @@ alias uuid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
 
 # ---------- Environment ----------
 
+# terminal
+export TERM=xterm-256color
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
+# bat
+ alias cat="bat"
+export BAT_THEME="TwoDark"
+export BAT_STYLE="numbers,changes"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --iglob '!.git'"
-FZF_DEFAULT_OPTS="--preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --theme=TwoDark --color=always --style=numbers,changes --pager=\"less -FR\" {} || cat {}) 2> /dev/null | head -300'"
+FZF_DEFAULT_OPTS="--border --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --color=always --pager=\"less -FR\" {} || cat {}) 2> /dev/null | head -500'"
+# Onedark theme
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=dark
 --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:-1,hl+:#d858fe
 --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
 '
+# Dracula Theme
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color=dark
+# --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
+# --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
+# '
+# Gruvbox theme
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color=fg:#ebdbb2,bg:#282828,hl:#689d6a
+# --color=fg+:#fbf1c7,bg+:#282828,hl+:#8ec07c
+# --color=info:#458588,prompt:#83a598,pointer:#fb4934
+# --color=marker:#fabd2f,spinner:#83a598,header:#83a598
+# '
+
+
+# Don't open browser automatically with CRA apps
+export BROWSER=none
 
 # asdf configuration
 export NODEJS_CHECK_SIGNATURES=no
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=/usr/local/Cellar/openssl@1.1/1.1.1g/"
 
 # Not sure what this is
-# fpath+=${ZDOTDIR:-~}/.zsh_functions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+. $HOME/.asdf/asdf.sh
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+fpath=(~/.stripe $fpath)
+autoload -Uz compinit && compinit -i

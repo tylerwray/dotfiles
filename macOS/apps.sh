@@ -25,21 +25,27 @@ gui_apps=(
   "1password"
   "alfred"
   "appcleaner"
+  "chrome"
+  "daisydisk"
   "docker"
   "fantastical"
   "firefox"
   "graphiql"
   "insomnia"
   "iterm2"
-  "notion"
-  "sketch"
-  "spotify"
-  "spectacle"
-  "the-unarchiver"
-  "things"
-  "quicklook-json"
-  "qlmarkdown"
+  "keka"
+  "kindle"
+  "postgres"
+  "postico"
   "qlcolorcode"
+  "qlmarkdown"
+  "quicklook-json"
+  "sketch"
+  "slack"
+  "spotify"
+  "specatcle"
+  "things"
+  "visual-studio-code"
 )
 
 for app in "${gui_apps[@]}"
@@ -50,14 +56,10 @@ done
 # Install Terminal apps
 terminal_apps=(
   "bat"
-  "elixir"
   "rg"
   "git"
-  "go"
   "jq"
   "neovim"
-  "python"
-  "ruby"
   "tree"
 )
 
@@ -65,4 +67,3 @@ for app in "${terminal_apps[@]}"
 do
   brew install $app
 done
-
