@@ -67,7 +67,7 @@ alias alc="nvim ~/.config/alacritty/alacritty.yml"
 # Shortcuts
 alias l="ls"
 alias g="git"
-alias e="nvim +Files!"
+alias e="nvim +Files"
 
 # Elixir
 # alias phx="source .env && iex -S mix phx.server"

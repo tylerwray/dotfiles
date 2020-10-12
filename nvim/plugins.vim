@@ -1,19 +1,27 @@
-" ========== PLUG INS ==========
-call plug#begin()
+" " ============= Vim-Plug ============== "{{{
+
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin(expand('~/.config/nvim/plugged'))
+
+"}}}
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
-Plug 'chrisbra/colorizer'
 Plug 'dense-analysis/ale'
 Plug 'elixir-editors/vim-elixir'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -113,6 +121,10 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_gopls_enabled = 0
+
+
+" --------- FZF ----------
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8, 'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 
 " --------- C++ ----------
 function! Formatonsave()

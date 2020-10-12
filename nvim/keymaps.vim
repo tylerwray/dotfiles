@@ -56,3 +56,7 @@ autocmd FileType go         nmap <buffer> <Leader>T :GoTest<CR>
 
 " Reload vim config
 map <C-s> :source ~/.config/nvim/init.vim<CR>
+
+" Quickly navigate buffers
+" nmap <Tab> :bnext<CR>
+" nmap <S-Tab> :bprevious<CR>
