@@ -1,6 +1,5 @@
 set list                                                          " Show list characters
 set listchars=tab:⟶\ ,extends:›,precedes:‹,nbsp:·,trail:·,space:· " Custom list characters
-" match ErrorMsg '\s\+$'                                            " TODO: Discover what this does
 set ai                                                            " auto indent
 set si                                                            " smart indent
 set smarttab                                                      " Use shift width to tab at line beginning
@@ -10,10 +9,6 @@ set softtabstop=2                                                 " unify
 set shiftwidth=2                                                  " unify
 set expandtab                                                     " Give me spaces or give me death
 set nowrap                                                        " do not wrap lines
-set foldmethod=indent                                             " Fold based on indentation
-set foldnestmax=10                                                " Don't go too crazy with folds
-set nofoldenable                                                  " Don't show filds right away
-set foldlevel=2                                                   " Initially show folds only this deep
 set autowrite                                                     " Save the file when shell commands are run
 set autoread                                                      " Update buffer when files change from outside
 set wildmenu                                                      " Nice menu completion
@@ -48,6 +43,3 @@ set undodir=~/.config/nvim/temp_dirs/undodir                      " Persistent u
 set undofile                                                      " Enable Persistent undo so that I can undo even when you close a buffer
 set pumheight=10                                                  " Make popup menu smaller
 set formatoptions-=cro                                            " Don't continue line comments
-
-" Make vim bg transparent to match terminal
-hi Normal guibg=NONE ctermbg=NONE

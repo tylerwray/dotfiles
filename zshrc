@@ -171,6 +171,7 @@ export NODEJS_CHECK_SIGNATURES=no
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=/usr/local/Cellar/openssl@1.1/1.1.1g/"
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 # Not sure what this is
 fpath+=${ZDOTDIR:-~}/.zsh_functions
@@ -182,3 +183,4 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 fpath=(~/.stripe $fpath)
 autoload -Uz compinit && compinit -i
+source ~/.bashrc.d/asdf
