@@ -133,7 +133,7 @@ export TERM=xterm-256color
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # bat
- alias cat="bat"
+alias cat="bat"
 export BAT_THEME="TwoDark"
 export BAT_STYLE="numbers,changes"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -170,7 +170,7 @@ export NODEJS_CHECK_SIGNATURES=no
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=/usr/local/Cellar/openssl@1.1/1.1.1g/"
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=/usr/local/Cellar/openssl@1.1/1.1.1h/"
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # Not sure what this is

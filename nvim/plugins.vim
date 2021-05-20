@@ -1,50 +1,52 @@
 " ========== PLUG INS ==========
 call plug#begin()
-" Language Client
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  let g:coc_global_extensions = ['coc-html', 'coc-json', 'coc-prettier']
-" Plug 'airblade/vim-gitgutter'
-" Plug 'dense-analysis/ale'
-" Plug 'elixir-editors/vim-elixir'
+Plug 'airblade/vim-gitgutter'
+Plug 'dense-analysis/ale'
+Plug 'elixir-editors/vim-elixir'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'maxmellon/vim-jsx-pretty'
-" Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " ---------- ALE ----------
-" let g:ale_sign_error = '●'
-" let g:ale_sign_warning = '.'
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_fix_on_save = 1
-" let g:ale_list_window_size = 5
-" let g:ale_fixers = {
-" \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-" \ 'elixir': ['mix_format'],
-" \ 'eelixir': ['prettier'],
-" \ 'javascript': ['prettier'],
-" \ 'markdown': ['prettier'],
-" \ 'html': ['prettier'],
-" \ 'javascript.jsx': ['prettier'],
-" \ 'json': ['prettier'],
-" \ 'ruby': ['rubocop'],
-" \ 'rust': ['rustfmt'],
-" \ 'sql': ['pgformatter'],
-" \ 'typescript': ['prettier'],
-" \ 'typescript.tsx': ['prettier'],
-" \}
-" let g:ale_linters = {
-" \ 'elixir': ['credo'],
-" \ 'javascript': ['eslint'],
-" \ 'typescript': ['eslint'],
-" \ 'typescript.tsx': ['eslint'],
-" \}
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_fix_on_save = 1
+let g:ale_list_window_size = 5
+let g:ale_fixers = {
+\ '*': ['remove_trailing_lines', 'trim_whitespace'],
+\ 'elixir': ['mix_format'],
+\ 'eelixir': ['prettier'],
+\ 'javascript': ['prettier'],
+\ 'markdown': ['prettier'],
+\ 'html': ['prettier'],
+\ 'javascript.jsx': ['prettier'],
+\ 'json': ['prettier'],
+\ 'ruby': ['rubocop'],
+\ 'rust': ['rustfmt'],
+\ 'sql': ['pgformatter'],
+\ 'typescript': ['prettier'],
+\ 'typescript.tsx': ['prettier'],
+\}
+let g:ale_linters = {
+\ 'elixir': ['credo'],
+\ 'javascript': ['eslint'],
+\ 'typescript': ['eslint'],
+\ 'typescript.tsx': ['eslint'],
+\}
 
 " ---------- LightLine ----------
 let g:lightline = {
@@ -64,6 +66,8 @@ let g:lightline = {
 \   'fugitive': 'LightlineFugitive',
 \ },
 \}
+
+let g:go_fmt_command = "goimports"
 
 function! LightlineReadonly()
 	return &readonly ? '' : ''
