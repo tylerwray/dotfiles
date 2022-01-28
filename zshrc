@@ -3,8 +3,11 @@
 #                Tyler Wray's .zshrc                 #
 #                                                    #
 ######################################################
-autoload -U +X bashcompinit && bashcompinit
-autoload -U +X compinit && compinit
+export ZSH_DISABLE_COMPFIX="true"
+
+include() {
+  [[ -f "$1" ]] && source "$1"
+}
 
 # Directories to be prepended to $PATH
 declare -a dirs_to_prepend
@@ -40,7 +43,7 @@ unset dirs_to_prepend
 export PATH
 
 # Hide the agnoster prefix user on local machine
-DEFAULT_USER='tylerwray'
+DEFAULT_USER='personal'
 prompt_context(){}
 
 # Path to your oh-my-zsh installation.
@@ -54,10 +57,10 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(asdf git docker)
 
-source $ZSH/oh-my-zsh.sh
+include $ZSH/oh-my-zsh.sh
 
 # Source local config that shouldn't be tracked with Git
-source ~/.localrc
+include ~/.localrc
 
 # ----------- Aliases --------------
 
@@ -168,9 +171,9 @@ export BROWSER=none
 # asdf configuration
 export NODEJS_CHECK_SIGNATURES=no
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+include ~/.fzf.zsh
 
-export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=/usr/local/Cellar/openssl@1.1/1.1.1h/"
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=$(brew --prefix openssl@1.1)"
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # Not sure what this is
@@ -178,9 +181,6 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-. $HOME/.asdf/asdf.sh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 fpath=(~/.stripe $fpath)
-autoload -Uz compinit && compinit -i
-source ~/.bashrc.d/asdf
