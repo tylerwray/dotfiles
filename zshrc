@@ -5,6 +5,10 @@
 ######################################################
 export ZSH_DISABLE_COMPFIX="true"
 
+include() {
+  [[ -f "$1" ]] && source "$1"
+}
+
 # Directories to be prepended to $PATH
 declare -a dirs_to_prepend
 dirs_to_prepend=(
@@ -56,12 +60,8 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(asdf git)
 
-source $ZSH/oh-my-zsh.sh
-
-# Source local config that shouldn't be tracked with Git
-source ~/.localrc
-# source <(kubectl completion zsh)
-
+include $ZSH/oh-my-zsh.sh
+include ~/.localrc
 
 # ----------- Aliases --------------
 
@@ -175,7 +175,7 @@ export BROWSER=none
 # asdf configuration
 export NODEJS_CHECK_SIGNATURES=no
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+include ~/.fzf.zsh
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
@@ -184,4 +184,14 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 fpath=(~/.stripe $fpath)
 autoload -Uz compinit && compinit -i
 
-export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=/usr/local/opt/openssl@1.1"
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=$(brew --prefix openssl@1.1)"
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+# Not sure what this is
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+fpath=(~/.stripe $fpath)
