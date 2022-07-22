@@ -4,14 +4,6 @@ command_exists () {
   type "$1" &> /dev/null ;
 }
 
-# Install nvm
-# if [ -d "$HOME/.nvm" ]; then
-  # echo "NVM already installed"
-# else
-  # echo "Installing NVM"
-  # curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-# fi
-
 # Install homebrew
 if command_exists brew ; then
   echo "Homebrew already installed"
@@ -25,17 +17,14 @@ gui_apps=(
   "1password"
   "alfred"
   "appcleaner"
-  "chrome"
   "daisydisk"
   "docker"
   "fantastical"
   "firefox"
-  "graphiql"
   "insomnia"
   "iterm2"
   "keka"
   "kindle"
-  "postgres"
   "postico"
   "qlcolorcode"
   "qlmarkdown"
@@ -43,14 +32,12 @@ gui_apps=(
   "sketch"
   "slack"
   "spotify"
-  "specatcle"
-  "things"
   "visual-studio-code"
 )
 
 for app in "${gui_apps[@]}"
 do
-  brew cask install $app
+  brew install --cask $app
 done
 
 # Install Terminal apps

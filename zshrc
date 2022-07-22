@@ -3,8 +3,7 @@
 #                Tyler Wray's .zshrc                 #
 #                                                    #
 ######################################################
-autoload -U +X bashcompinit && bashcompinit
-autoload -U +X compinit && compinit
+export ZSH_DISABLE_COMPFIX="true"
 
 # Directories to be prepended to $PATH
 declare -a dirs_to_prepend
@@ -26,6 +25,8 @@ dirs_to_prepend=(
   "/usr/local/opt/icu4c/bin"
   "/usr/local/opt/icu4c/sbin"
   "$HOME/.cargo/bin"
+  "$HOME/.yarn/bin"
+  "$HOME/.config/yarn/global/node_modules/.bin"
 )
 
 # Loop and assign path above
@@ -38,6 +39,7 @@ do
 done
 unset dirs_to_prepend
 export PATH
+
 
 # Hide the agnoster prefix user on local machine
 DEFAULT_USER='tylerwray'
@@ -52,17 +54,16 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(asdf git docker)
+plugins=(asdf git)
 
 source $ZSH/oh-my-zsh.sh
 
 # Source local config that shouldn't be tracked with Git
 source ~/.localrc
+# source <(kubectl completion zsh)
+
 
 # ----------- Aliases --------------
-
-# Alacritty configuration
-alias alc="nvim ~/.config/alacritty/alacritty.yml"
 
 # Shortcuts
 alias l="ls"
@@ -70,21 +71,20 @@ alias g="git"
 alias e="nvim +Files"
 
 # Elixir
-# alias phx="source .env && iex -S mix phx.server"
 alias phx="iex -S mix phx.server"
 
 # Docker
-alias dc="docker-compose"
-alias drm="docker rm -f \$(docker ps -aq)"
-alias drmi="docker rmi -f \$(docker images -q)"
-alias drmv="docker volume rm -f \$(docker volume ls)"
-alias dsp="docker system prune --all --force --volumes"
+# alias dc="docker-compose"
+# alias drm="docker rm -f \$(docker ps -aq)"
+# alias drmi="docker rmi -f \$(docker images -q)"
+# alias drmv="docker volume rm -f \$(docker volume ls)"
+# alias dsp="docker system prune --all --force --volumes"
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias dig="dig +nocmd any +multiline +noall +answer"
-alias localip="ipconfig getifaddr en1"
-alias myip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
+# alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+# alias dig="dig +nocmd any +multiline +noall +answer"
+# alias localip="ipconfig getifaddr en1"
+# alias myip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
 
 # Git Stuff
 alias gs='git status'
@@ -94,10 +94,11 @@ alias gsl='git shortlog -sn'
 alias gwts='git ls-files | xargs wc -l' # count number of lines of code in a git project
 alias lumberjack="git fetch -p > /dev/null 2>&1 && git branch --no-color -vv | grep 'origin/.*: gone]' | awk '{print \$1}' | xargs git branch -D"
 alias wip="git add . && git commit -m \"WIP\" --no-verify"
+alias unwip="git reset HEAD~"
 export GIT_MERGE_AUTOEDIT=no # Don't open merge message edit when merging master
 
 # Download file and save it with filename of remote file
-alias get="curl -O -L"
+# alias get="curl -O -L"
 
 # File size
 alias fs="stat -f \"%z bytes\""
@@ -107,19 +108,18 @@ alias reload="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'"
 alias zshrc="nvim ~/dotfiles/zshrc"
 alias localrc="nvim ~/.localrc"
 
-
 # vim
 alias vi="vim"
 alias vim="nvim"
-alias vc="(cd ~/.config/nvim && nvim .)"
+alias nvc="(cd ~/.config/nvim && nvim .)"
 alias plug_install="nvim +PlugInstall +qall"
 
 # tmux
-alias tm="TERM=tmux-256color tmux -2"
-alias tmc="nvim ~/.tmux.conf"
-alias tmks="tmux kill-session -t"
+# alias tm="TERM=tmux-256color tmux -2"
+# alias tmc="nvim ~/.tmux.conf"
+# alias tmks="tmux kill-session -t"
 
-alias k="kubectl"
+# alias k="kubectl"
 
 # Generate a UUID
 alias uuid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
@@ -134,19 +134,20 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # bat
 alias cat="bat"
-export BAT_THEME="TwoDark"
+export BAT_THEME="Monokai Extended"
 export BAT_STYLE="numbers,changes"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --iglob '!.git'"
 FZF_DEFAULT_OPTS="--border --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --color=always --pager=\"less -FR\" {} || cat {}) 2> /dev/null | head -500'"
+
 # Onedark theme
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color=dark
---color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:-1,hl+:#d858fe
---color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
-'
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color=dark
+# --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:-1,hl+:#d858fe
+# --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
+# '
 # Dracula Theme
 # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 # --color=dark
@@ -161,6 +162,12 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 # --color=marker:#fabd2f,spinner:#83a598,header:#83a598
 # '
 
+# Sonokai Theme
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=fg:#afafb5,bg:#2c2e34,hl:#90ba6c
+--color=fg+:#e2e2e3,bg+:#2c2e34,hl+:#a7df78
+--color=info:#e7c664,prompt:#fc5d7c,pointer:#b39df3
+--color=marker:#f39660,spinner:#b39df3,header:#76cce0'
 
 # Don't open browser automatically with CRA apps
 export BROWSER=none
@@ -170,17 +177,11 @@ export NODEJS_CHECK_SIGNATURES=no
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=/usr/local/Cellar/openssl@1.1/1.1.1h/"
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-# Not sure what this is
-fpath+=${ZDOTDIR:-~}/.zsh_functions
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-. $HOME/.asdf/asdf.sh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 fpath=(~/.stripe $fpath)
 autoload -Uz compinit && compinit -i
-source ~/.bashrc.d/asdf
+
+export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=/usr/local/opt/openssl@1.1"

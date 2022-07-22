@@ -27,3 +27,7 @@ Temporary Items
 
 # VScode
 .elixir_ls/
+
+# yalc
+yalc.lock
+.yalc/
