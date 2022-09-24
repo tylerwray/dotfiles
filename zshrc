@@ -46,7 +46,7 @@ export PATH
 
 
 # Hide the agnoster prefix user on local machine
-DEFAULT_USER='tylerwray'
+DEFAULT_USER='personal'
 prompt_context(){}
 
 # Path to your oh-my-zsh installation.
