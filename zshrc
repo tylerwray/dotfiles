@@ -122,7 +122,7 @@ alias plug_install="nvim +PlugInstall +qall"
 # alias k="kubectl"
 
 # Generate a UUID
-alias uuid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
+# alias uuid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
 
 # ---------- Environment ----------
 
