@@ -1,17 +1,11 @@
--- require "user.alpha"
--- require "user.cmp"
 require("user.colorscheme")
-require("user.commands")
 require("user.comment")
 require("user.fzf")
 require("user.gitsigns")
 require("user.illuminate")
-require("user.impatient")
 require("user.indent-blankline")
 require("user.keymaps")
 require("user.lualine")
-require("user.nvim-tree")
 require("user.options")
 require("user.plugins")
 require("user.treesitter")
-require("user.lsp")

@@ -179,19 +179,8 @@ include ~/.fzf.zsh
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-fpath+=${ZDOTDIR:-~}/.zsh_functions
-
 fpath=(~/.stripe $fpath)
 autoload -Uz compinit && compinit -i
 
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=$(brew --prefix openssl@1.1)"
 export ERL_AFLAGS="-kernel shell_history enabled"
-
-# Not sure what this is
-fpath+=${ZDOTDIR:-~}/.zsh_functions
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-fpath+=${ZDOTDIR:-~}/.zsh_functions
-
-fpath=(~/.stripe $fpath)

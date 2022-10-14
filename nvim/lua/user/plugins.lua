@@ -42,11 +42,10 @@ return packer.startup(function(use)
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins
-	use("numToStr/Comment.nvim")
+	use({"numToStr/Comment.nvim", commit = "fe9bbdb"})
 	use("JoosepAlviste/nvim-ts-context-commentstring")
-	use("kyazdani42/nvim-tree.lua")
-	use("kyazdani42/nvim-web-devicons")
 	use("jxnblk/vim-mdx-js")
+	use("preservim/nerdtree")
 
 	use({
 		"junegunn/fzf",
@@ -58,27 +57,11 @@ return packer.startup(function(use)
 	use("nvim-lualine/lualine.nvim")
 	use("lewis6991/impatient.nvim") -- speed up loading?
 	use("lukas-reineke/indent-blankline.nvim")
-	-- use("goolord/alpha-nvim") -- Dashboard
 
 	-- Colorscheme
 	use("sainnhe/sonokai")
 
-	-- cmp plugins
-	-- use("hrsh7th/nvim-cmp") -- The completion plugin
-	-- use("hrsh7th/cmp-buffer") -- buffer completions
-	-- use("hrsh7th/cmp-nvim-lsp")
-	-- use("hrsh7th/cmp-path") -- path completions
-	-- use("saadparwaiz1/cmp_luasnip") -- snippet completions
-	-- use("hrsh7th/cmp-nvim-lua")
-
-	-- snippets
-	-- use("L3MON4D3/LuaSnip") --snippet engine
-	-- use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-
 	-- LSP
-	use("neovim/nvim-lspconfig") -- enable LSP
-	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
-	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("RRethy/vim-illuminate")
 
 	-- Treesitter
