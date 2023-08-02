@@ -10,4 +10,4 @@ vim.g['fzf_layout'] = {
 }
 
 -- Unset the fzf colors that fzf.vim sets, use the colors from my terminal
-vim.cmd([[unlet g:fzf_colors]])
+-- vim.cmd([[unlet g:fzf_colors]])

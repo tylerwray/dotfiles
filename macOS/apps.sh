@@ -48,6 +48,7 @@ terminal_apps=(
   "jq"
   "neovim"
   "tree"
+  "fzf"
 )
 
 for app in "${terminal_apps[@]}"

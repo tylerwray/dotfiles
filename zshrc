@@ -3,56 +3,61 @@
 #                Tyler Wray's .zshrc                 #
 #                                                    #
 ######################################################
-export ZSH_DISABLE_COMPFIX="true"
+
+# IDK If I need this anymore
+# export ZSH_DISABLE_COMPFIX="true"
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 include() {
   [[ -f "$1" ]] && source "$1"
 }
 
 # Directories to be prepended to $PATH
-declare -a dirs_to_prepend
-dirs_to_prepend=(
-  "/bin"
-  "/sbin"
-  "/usr/sbin"
-  "/usr/bin"
-  "/usr/local/bin"
-  "/usr/local/sbin"
-  "/usr/local/git/bin"
-  "/usr/local/"
-  "/usr/local/mysql/bin"
-  "/sw/bin/"
-  "$HOME/dotfiles/bin"
-  "$HOME/bin"
-  "$HOME/Library/Python/2.7/bin"
-  "$HOME/go/bin"
-  "/usr/local/opt/icu4c/bin"
-  "/usr/local/opt/icu4c/sbin"
-  "$HOME/.cargo/bin"
-  "$HOME/.yarn/bin"
-  "$HOME/.config/yarn/global/node_modules/.bin"
-)
-
-# Loop and assign path above
-for dir in ${(k)dirs_to_prepend[@]}
-do
-  if [ -d ${dir} ]; then
-    # If these directories exist, then prepend them to existing PATH
-    PATH="${dir}:$PATH"
-  fi
-done
-unset dirs_to_prepend
-export PATH
-
-
-# Hide the agnoster prefix user on local machine
-DEFAULT_USER='personal'
-prompt_context(){}
+# declare -a dirs_to_prepend
+# dirs_to_prepend=(
+#   "/bin"
+#   "/sbin"
+#   "/usr/sbin"
+#   "/usr/bin"
+#   "/usr/local/bin"
+#   "/usr/local/sbin"
+#   "/usr/local/git/bin"
+#   "/usr/local/"
+#   "/usr/local/mysql/bin"
+#   "/sw/bin/"
+#   "$HOME/dotfiles/bin"
+#   "$HOME/bin"
+#   "$HOME/Library/Python/2.7/bin"
+#   "$HOME/go/bin"
+#   "/usr/local/opt/icu4c/bin"
+#   "/usr/local/opt/icu4c/sbin"
+#   "$HOME/.cargo/bin"
+#   "$HOME/.yarn/bin"
+#   "$HOME/.config/yarn/global/node_modules/.bin"
+# )
+#
+# # Loop and assign path above
+# for dir in ${(k)dirs_to_prepend[@]}
+# do
+#   if [ -d ${dir} ]; then
+#     # If these directories exist, then prepend them to existing PATH
+#     PATH="${dir}:$PATH"
+#   fi
+# done
+# unset dirs_to_prepend
+# export PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -73,19 +78,6 @@ alias e="nvim +Files"
 # Elixir
 alias phx="iex -S mix phx.server"
 
-# Docker
-# alias dc="docker-compose"
-# alias drm="docker rm -f \$(docker ps -aq)"
-# alias drmi="docker rmi -f \$(docker images -q)"
-# alias drmv="docker volume rm -f \$(docker volume ls)"
-# alias dsp="docker system prune --all --force --volumes"
-
-# IP addresses
-# alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-# alias dig="dig +nocmd any +multiline +noall +answer"
-# alias localip="ipconfig getifaddr en1"
-# alias myip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
-
 # Git Stuff
 alias gs='git status'
 alias gl='git log'
@@ -97,9 +89,6 @@ alias wip="git add . && git commit -m \"WIP\" --no-verify"
 alias unwip="git reset HEAD~"
 export GIT_MERGE_AUTOEDIT=no # Don't open merge message edit when merging master
 
-# Download file and save it with filename of remote file
-# alias get="curl -O -L"
-
 # File size
 alias fs="stat -f \"%z bytes\""
 
@@ -109,20 +98,8 @@ alias zshrc="nvim ~/dotfiles/zshrc"
 alias localrc="nvim ~/.localrc"
 
 # vim
-alias vi="vim"
-alias vim="nvim"
 alias nvc="(cd ~/.config/nvim && nvim .)"
 alias plug_install="nvim +PlugInstall +qall"
-
-# tmux
-# alias tm="TERM=tmux-256color tmux -2"
-# alias tmc="nvim ~/.tmux.conf"
-# alias tmks="tmux kill-session -t"
-
-# alias k="kubectl"
-
-# Generate a UUID
-# alias uuid="uuidgen | awk '{printf tolower(\$0)}' | pbcopy"
 
 # ---------- Environment ----------
 
@@ -133,8 +110,7 @@ export TERM=xterm-256color
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # bat
-alias cat="bat"
-export BAT_THEME="Monokai Extended"
+export BAT_THEME="TwoDark"
 export BAT_STYLE="numbers,changes"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
@@ -143,17 +119,19 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --iglob '!.git'"
 FZF_DEFAULT_OPTS="--border --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --color=always --pager=\"less -FR\" {} || cat {}) 2> /dev/null | head -500'"
 
 # Onedark theme
-# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-# --color=dark
-# --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:-1,hl+:#d858fe
-# --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
-# '
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=dark
+--color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:-1,hl+:#d858fe
+--color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
+'
+
 # Dracula Theme
 # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 # --color=dark
 # --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
 # --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
 # '
+
 # Gruvbox theme
 # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 # --color=fg:#ebdbb2,bg:#282828,hl:#689d6a
@@ -163,17 +141,11 @@ FZF_DEFAULT_OPTS="--border --preview '[[ \$(file --mime {}) =~ binary ]] && echo
 # '
 
 # Sonokai Theme
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color=fg:#afafb5,bg:#2c2e34,hl:#90ba6c
---color=fg+:#e2e2e3,bg+:#2c2e34,hl+:#a7df78
---color=info:#e7c664,prompt:#fc5d7c,pointer:#b39df3
---color=marker:#f39660,spinner:#b39df3,header:#76cce0'
-
-# Don't open browser automatically with CRA apps
-export BROWSER=none
-
-# asdf configuration
-export NODEJS_CHECK_SIGNATURES=no
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color=fg:#afafb5,bg:#2c2e34,hl:#90ba6c
+# --color=fg+:#e2e2e3,bg+:#2c2e34,hl+:#a7df78
+# --color=info:#e7c664,prompt:#fc5d7c,pointer:#b39df3
+# --color=marker:#f39660,spinner:#b39df3,header:#76cce0'
 
 include ~/.fzf.zsh
 
@@ -182,5 +154,12 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 fpath=(~/.stripe $fpath)
 autoload -Uz compinit && compinit -i
 
+# Ruby
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=$(brew --prefix openssl@1.1)"
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

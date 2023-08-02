@@ -30,9 +30,9 @@
     newHighlight = "green bold 22"
 
 [color "status"]
-    added = green reverse
-    changed = yellow reverse
-    untracked = red reverse
+    added = green 
+    changed = yellow 
+    untracked = red
 
 # Git mergetool
 [merge]
@@ -44,7 +44,7 @@
     autocrlf = input
     mergeoptions = --no-edit
     ignorecase = false
-    excludesfile = /Users/tylerwray/.gitignore_global
+	excludesfile = /Users/tyler.wray/.gitignore_global
 
 [diff "bin"]
     # Use `hexdump` to diff binary files
