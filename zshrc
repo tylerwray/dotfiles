@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ######################################################
 #                                                    #
 #                Tyler Wray's .zshrc                 #
@@ -19,6 +26,7 @@ include() {
 }
 
 # Directories to be prepended to $PATH
+<<<<<<< Updated upstream
 # declare -a dirs_to_prepend
 # dirs_to_prepend=(
 #   "/bin"
@@ -52,6 +60,47 @@ include() {
 # done
 # unset dirs_to_prepend
 # export PATH
+=======
+declare -a dirs_to_prepend
+dirs_to_prepend=(
+  "/bin"
+  "/sbin"
+  "/usr/sbin"
+  "/usr/bin"
+  "/usr/local/bin"
+  "/usr/local/sbin"
+  "/usr/local/git/bin"
+  "/usr/local/"
+  "/usr/local/mysql/bin"
+  "/sw/bin/"
+  "$HOME/dotfiles/bin"
+  "$HOME/bin"
+  "$HOME/Library/Python/2.7/bin"
+  "$HOME/go/bin"
+  "/usr/local/opt/icu4c/bin"
+  "/usr/local/opt/icu4c/sbin"
+  "$HOME/.cargo/bin"
+  "$HOME/.yarn/bin"
+  "$HOME/.config/yarn/global/node_modules/.bin"
+  "/opt/homebrew/bin"
+)
+
+# Loop and assign path above
+for dir in ${(k)dirs_to_prepend[@]}
+do
+  if [ -d ${dir} ]; then
+    # If these directories exist, then prepend them to existing PATH
+    PATH="${dir}:$PATH"
+  fi
+done
+unset dirs_to_prepend
+export PATH
+
+
+# Hide the agnoster prefix user on local machine
+DEFAULT_USER='tylerwray'
+prompt_context(){}
+>>>>>>> Stashed changes
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -99,7 +148,10 @@ alias localrc="nvim ~/.localrc"
 
 # vim
 alias nvc="(cd ~/.config/nvim && nvim .)"
+<<<<<<< Updated upstream
 alias plug_install="nvim +PlugInstall +qall"
+=======
+>>>>>>> Stashed changes
 
 # ---------- Environment ----------
 
@@ -154,12 +206,25 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 fpath=(~/.stripe $fpath)
 autoload -Uz compinit && compinit -i
 
+<<<<<<< Updated upstream
 # Ruby
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=$(brew --prefix openssl@1.1)"
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+=======
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Load rbenv
+eval "$(rbenv init - zsh)"
+
+>>>>>>> Stashed changes
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

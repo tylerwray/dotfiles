@@ -1,11 +1,9 @@
--- Shorten function name
-local keymap = vim.keymap.set
--- Silent keymap option
-local opts = { silent = true }
-
 -- Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Modes
 --   normal_mode = "n",
@@ -16,58 +14,47 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- Normal
+--
+-- Keymaps for better default experience
+-- See `:help vim.keymap.set()`
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Normal
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
+
+-- Neo-tree shortcuts
+vim.keymap.set('n', '<leader>b', ':Neotree toggle<CR>')
+vim.keymap.set('n', '<leader>e', ':Neotree reveal<CR>')
+
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Clear highlights
-keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
+vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { silent = true })
 
 -- Better paste
-keymap("v", "p", '"_dP', opts)
+vim.keymap.set("v", "p", '"_dP', { silent = true })
 
 -- Visual --
 -- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- NERDTree
-keymap("n", "<leader>e", ":NERDTreeToggle<CR>", opts)
-
--- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
-
--- Command Windows
-keymap("n", "<leader>p", ":Files<CR>", opts)
-keymap("n", "<leader>f", ":Rg<CR>", opts)
-keymap("n", "<leader>b", ":Buffers<CR>", opts)
-
--- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
-
--- Yank text indo the OS clipboard
--- vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR>
+vim.keymap.set("v", "<", "<gv", { silent = true })
+vim.keymap.set("v", ">", ">gv", { silent = true })
 
 -- Awesome search and replace
-keymap("n", "<leader>s", ":%s///g<left><left>", opts)
+vim.keymap.set("n", "<leader>s", ":%s///g<left><left>", { silent = true })
 
+-- Elxir Test shortcuts
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "elixir" },
-  callback = function()
-    vim.cmd [[
+    pattern = { "elixir" },
+    callback = function()
+        vim.cmd [[
       nmap <buffer> <Leader>t :execute "!clear && mix test %\\:" . line(".")<CR>
-    ]]
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "elixir" },
-  callback = function()
-    vim.cmd [[
       nmap <buffer> <Leader>T :execute "!clear && mix test %"<CR>
     ]]
-  end,
+    end,
 })
