@@ -14,17 +14,7 @@ if not vim.loop.fs_stat(lazypath) then
     }
 end
 
-<<<<<<< Updated upstream
--- Autocommand that reloads neovim whenever you save the plugins.lua file
--- vim.cmd([[
---   augroup packer_user_config
---     autocmd!
---     autocmd BufWritePost plugins.lua source <afile> | PackerSync
---   augroup end
--- ]])
-=======
 vim.opt.rtp:prepend(lazypath)
->>>>>>> Stashed changes
 
 require('lazy').setup({
 
@@ -51,15 +41,6 @@ require('lazy').setup({
             }
         }
 
-<<<<<<< Updated upstream
-	-- Colorscheme
-	use("sainnhe/sonokai")
-    use("one-dark/onedark.nvim")
-
-
-	-- LSP
-	-- use("RRethy/vim-illuminate")
-=======
     },
 
     -- LSP
@@ -69,7 +50,6 @@ require('lazy').setup({
             -- Automatically install LSPs to stdpath for neovim
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
->>>>>>> Stashed changes
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`

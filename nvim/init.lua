@@ -1,10 +1,10 @@
 -- Always first
 require("user.plugins")
 
+require("user.conform")
 require("user.illuminate")
 require("user.keymaps")
 require("user.lsp")
-require("user.conform")
 require("user.options")
 require("user.telescope")
 require("user.treesitter")
