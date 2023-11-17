@@ -2,6 +2,7 @@
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.keymap.set({ "n", "v" }, " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -13,13 +14,10 @@ vim.g.maplocalleader = ' '
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal
---
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- Copy to clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y');
+vim.keymap.set("n", "<leader>yy", '"+yy');
 
--- Normal
 -- Better window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
@@ -37,10 +35,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Clear highlights
 vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { silent = true })
 
--- Better paste
-vim.keymap.set("v", "p", '"_dP', { silent = true })
-
--- Visual --
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", { silent = true })
 vim.keymap.set("v", ">", ">gv", { silent = true })
@@ -58,3 +52,4 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     ]]
     end,
 })
+

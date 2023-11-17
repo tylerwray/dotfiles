@@ -43,24 +43,23 @@ local on_attach = function(_, bufnr)
     end, { desc = 'Format current buffer with LSP' })
 end
 
-local status_ok, mason = pcall(require, "mason")
-if not status_ok then
+local mason_ok, mason = pcall(require, "mason")
+if not mason_ok then
     return
 end
 
-status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not status_ok then
+local mason_lsp_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not mason_lsp_ok then
     return
 end
-
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 mason.setup()
 mason_lspconfig.setup()
 
-status_ok, neodev = pcall(require, "neodev")
-if not status_ok then
+local neodev_ok, neodev = pcall(require, "neodev")
+if not neodev_ok then
     return
 end
 
@@ -95,9 +94,6 @@ local servers = {
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
     ensure_installed = vim.tbl_keys(servers),

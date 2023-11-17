@@ -117,7 +117,13 @@ require('lazy').setup({
         priority = 1000,
         config = function()
             vim.cmd.colorscheme "catppuccin-macchiato"
-        end
+        end,
+        opts = {
+            integrations = {
+                mason = true,
+                neotree = false,
+            }
+        }
     },
 
     {
