@@ -42,6 +42,8 @@ require('lazy').setup({
 
     },
 
+    { 'ThePrimeagen/harpoon' },
+
     -- LSP
     {
         'neovim/nvim-lspconfig',
@@ -77,8 +79,8 @@ require('lazy').setup({
         opts = {
             -- See `:help gitsigns.txt`
             signs = {
-                add = { text = '+' },
-                change = { text = '~' },
+                add = { text = '|' },
+                change = { text = '|' },
                 delete = { text = '_' },
                 topdelete = { text = '‾' },
                 changedelete = { text = '~' },
@@ -121,7 +123,7 @@ require('lazy').setup({
         opts = {
             integrations = {
                 mason = true,
-                neotree = false,
+                neotree = true,
             }
         }
     },
@@ -173,6 +175,16 @@ require('lazy').setup({
                     return vim.fn.executable 'make' == 1
                 end,
             },
+        },
+    },
+
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
         },
     },
 

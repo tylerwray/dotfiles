@@ -32,15 +32,15 @@ vim.keymap.set('n', '<leader>e', ':Neotree reveal<CR>')
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Clear highlights
-vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { silent = true })
-
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", { silent = true })
 vim.keymap.set("v", ">", ">gv", { silent = true })
 
 -- Awesome search and replace
 vim.keymap.set("n", "<leader>s", ":%s///g<left><left>", { silent = true })
+
+-- Trouble
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
 
 -- Elxir Test shortcuts
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -52,4 +52,3 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     ]]
     end,
 })
-

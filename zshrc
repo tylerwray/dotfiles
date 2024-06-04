@@ -110,8 +110,11 @@ alias reload="source ~/.zshrc && echo 'Shell config reloaded from ~/.zshrc'"
 alias zshrc="nvim ~/dotfiles/zshrc"
 alias localrc="nvim ~/.localrc"
 
-# vim
+# neovim
 alias nvc="(cd ~/.config/nvim && nvim .)"
+
+# tmux
+alias tmc="(cd ~/.config/tmux && nvim .)"
 
 # ---------- Environment ----------
 
@@ -122,7 +125,7 @@ export TERM=xterm-256color
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # bat
-export BAT_THEME="TwoDark"
+export BAT_THEME="Catppuccin-macchiato"
 export BAT_STYLE="numbers,changes"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
@@ -131,11 +134,17 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --iglob '!.git'"
 FZF_DEFAULT_OPTS="--border --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --color=always --pager=\"less -FR\" {} || cat {}) 2> /dev/null | head -500'"
 
 # Onedark theme
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color=dark
---color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:-1,hl+:#d858fe
---color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
-'
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color=dark
+# --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:-1,hl+:#d858fe
+# --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
+# '
+
+# Catppuccin-Macchiato Theme
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS" \
+--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
 
 # Dracula Theme
 # export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'

@@ -2,7 +2,6 @@ require("user.keymaps")
 require("user.options")
 
 require("user.plugins")
-
 require("user.conform")
 require("user.lsp")
 require("user.telescope")
