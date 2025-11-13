@@ -11,6 +11,23 @@ fi
 #                                                    #
 ######################################################
 
+######################################################
+#                                                    #
+#                     DX Config                      #
+#                                                    #
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export PGGSSENCMODE="disable"
+
+function connect_datacloud() {
+  ~/dx/app/bin/rails runner "begin; Dev::ConnectDatacloud.run($1); rescue => e; print e.message; end"
+}
+
+function support_update() {
+  heroku run "rake eng_support_recap RECIPIENT=tyler@getdx.com" -a dx-prod
+}
+######################################################
+
+
 # IDK If I need this anymore
 # export ZSH_DISABLE_COMPFIX="true"
 
@@ -40,13 +57,13 @@ dirs_to_prepend=(
   "/sw/bin/"
   "$HOME/dotfiles/bin"
   "$HOME/bin"
-  "$HOME/Library/Python/2.7/bin"
   "$HOME/go/bin"
   "/usr/local/opt/icu4c/bin"
   "/usr/local/opt/icu4c/sbin"
   "$HOME/.cargo/bin"
   "$HOME/.yarn/bin"
   "$HOME/.config/yarn/global/node_modules/.bin"
+  "/opt/homebrew/opt/postgresql@17/bin"
   "/opt/homebrew/bin"
 )
 
@@ -76,7 +93,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(asdf git)
+plugins=(asdf git poetry)
 
 include $ZSH/oh-my-zsh.sh
 include ~/.localrc
@@ -87,6 +104,9 @@ include ~/.localrc
 alias l="ls"
 alias g="git"
 alias e="nvim +Files"
+alias python="python3"
+alias py="python3"
+alias pip="pip3"
 
 # Elixir
 alias phx="iex -S mix phx.server"
@@ -98,6 +118,7 @@ alias gb='git branch | cat'
 alias gsl='git shortlog -sn'
 alias gwts='git ls-files | xargs wc -l' # count number of lines of code in a git project
 alias lumberjack="git fetch -p > /dev/null 2>&1 && git branch --no-color -vv | grep 'origin/.*: gone]' | awk '{print \$1}' | xargs git branch -D"
+alias lj="lumberjack"
 alias wip="git add . && git commit -m \"WIP\" --no-verify"
 alias unwip="git reset HEAD~"
 export GIT_MERGE_AUTOEDIT=no # Don't open merge message edit when merging master
@@ -187,4 +208,14 @@ eval "$(rbenv init - zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Created by `pipx` on 2024-08-19 18:46:49
+export PATH="$PATH:/Users/tylerwray/.local/bin"
+
+. ${ASDF_DATA_DIR:-$HOME/.asdf}/plugins/golang/set-env.zsh
+
 

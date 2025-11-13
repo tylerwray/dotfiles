@@ -32,3 +32,6 @@ Temporary Items
 # yalc
 yalc.lock
 .yalc/
+
+# Claude local rules
+.claude/
